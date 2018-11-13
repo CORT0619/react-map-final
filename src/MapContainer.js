@@ -8,11 +8,6 @@ const mapStyles = {
   height: '100%'
 };
 
-// const locations = [];
-// const Listing = ({ places }) => (
-//   <ul>{places && places.map(p => <li key={p.id}>{p.name}</li>)}</ul>
-// );
-
 class MapContainer extends Component {
   static propTypes = {
     google: PropTypes.object,
@@ -31,20 +26,22 @@ class MapContainer extends Component {
 
   componentWillReceiveProps(nextProps) {
     console.log('nextProps ', nextProps);
+    /*  update state with new places if they've changed */
     if (nextProps.places !== this.state.places) {
       this.setState({
         places: nextProps.places
       });
     }
 
-    if(nextProps.clicked !== this.state.clicked) {
+    /* if the clicked prop has changed then update it in state */
+    if (nextProps.clicked !== this.state.clicked) {
       this.setState({
         clicked: nextProps.clicked,
         showClicked: true
       });
-      console.log('this.state.clicked ', this.state.clicked);
     } 
 
+    /* if activeIndex has changed then update it in state */
     if (nextProps.activeIndex !== this.state.activeIndex) {
       this.setState({
         activeIndex: nextProps.activeIndex
@@ -91,19 +88,17 @@ class MapContainer extends Component {
                   animation={(activeIndex !== index || activeIndex === -1) ? 0 : 1}>
 
               {this.state.showClicked && (
-                <div style={{
-                  position: 'absolute',
-                  border: '3px solid blue',
-                  zIndex: 100
-                }}>Blah!</div>
-                          // <InfoWindow>
-                          //   <div>
-                          //     {/* <p>{place.name}</p> */}
-                          //     <p>blah1</p>
-                          //     {/* <span>{place.location.address}, {place.location.city}, {place.location.country}</span> */}
-                          //     <span>blah2</span>
-                          //   </div>
-                          // </InfoWindow>
+                // <div style={{
+                //   position: 'absolute',
+                //   border: '3px solid blue',
+                //   zIndex: 100
+                // }}>Blah!</div>
+                          <InfoWindow>
+                            <div>
+                              <p>{place.name}</p>
+                              <span>{place.location.address}, {place.location.city}, {place.location.country}</span>
+                            </div>
+                          </InfoWindow>
               )}
 
           </Marker>          

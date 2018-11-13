@@ -21,14 +21,14 @@ class App extends Component {
     });
   }
 
-  updatePlaces = event => {
-    console.log('something');
-    console.log('event.target.value ', event.target.value);
-    // this.setState({
-    //   clicked: event.target.value
-    // });
-    console.log('places ', this.state.places);
-  }
+  // updatePlaces = event => {
+  //   console.log('something');
+  //   console.log('event.target.value ', event.target.value);
+  //   // this.setState({
+  //   //   clicked: event.target.value
+  //   // });
+  //   console.log('places ', this.state.places);
+  // }
 
   componentDidMount() {
     // let maps = load_google_maps();
@@ -53,6 +53,7 @@ class App extends Component {
     //   console.log('res ', res);
     // });
 
+    /* gets the featured places in the current location and sets the state with those places */ 
     getFoursquarePlaces()
       .then(response => {
         const places = response.response.groups[0].items.map(place => place.venue);
@@ -60,12 +61,10 @@ class App extends Component {
         this.setState({
           places: places
         });
-        console.log('this.state.places ', this.state.places);
       });
   }
 
   clicked = place => {
-    console.log('place passed in ', place);
     this.setState({
       clicked: place
     });
@@ -83,9 +82,12 @@ class App extends Component {
 
     if (query) {
       const match = new RegExp(escapeRegExp(query), 'i');
+      /*
+      Filter places based on the place's name and every category
+      */
       filteredPlaces = places.filter(place => place.categories.every(c => match.test(c.name)) || match.test(place.name));
     } else {
-      filteredPlaces = places.slice();
+      filteredPlaces = places.slice(); // copy the places as is
     }
 
     return (

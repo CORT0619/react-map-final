@@ -24,17 +24,18 @@ class SearchPage extends Component {
 
   displayPlaceData = (place, ind) => {
     const { clicked, activeIndex } = this.props;
-    const cloned = this.state.places.slice();
+    const cloned = this.state.places.slice(); // copy the places state
     let index = ind;
 
+    /* if a difference list item is clicked from last time then hide the previously opened item*/
     if (this.state.activeIndex !== -1 && this.state.activeIndex !== ind) {
       cloned[this.state.activeIndex].showPlaceData = false;
 
-    } else if (this.state.activeIndex === ind) {
+    } else if (this.state.activeIndex === ind) { // stops animation of the list item's associated marker 
       index = -1;
       // cloned[ind].showPlaceData = !cloned[ind].showPlaceData;
     }
-    cloned[ind].showPlaceData = !cloned[ind].showPlaceData;
+    cloned[ind].showPlaceData = !cloned[ind].showPlaceData; // toggles the showing/hiding of the place data
     clicked(place);
     activeIndex(index);
     this.setState({
