@@ -17,13 +17,13 @@ class MapContainer extends Component {
 
   state = {
     places: this.props.places,
-    // clicked: this.props.clicked,
     clicked: {},
-    // activeMarker: -1,
     showClicked: false,
-    activeIndex: -1
+    activeIndex: -1,
+    activePlace: {}
   };
 
+  
   componentWillReceiveProps(nextProps) {
     console.log('nextProps ', nextProps);
     /*  update state with new places if they've changed */
@@ -49,25 +49,21 @@ class MapContainer extends Component {
     }
   }
 
-  onMarkerClicked = (/*props, marker, e*//*idx*/) => {
-    // console.log('idx ', idx);
-    // this.setState({
-    //   // clicked: marker,
-    //   activeMarker: marker,
-    //   showClicked: true
-    // });
-    // this.setState({
-    //   activeMarker: idx
-    // });
+  onMarkerClicked = (props, marker, e) => {
     this.setState({
+      activeMarker: marker,
       showClicked: true
     });
-    console.log('this.state ', this.state);
+  }
+
+  markerAnimation(currentIndex) {
+    if (this.state.activeIndex === currentIndex) {
+      return 1;
+    }
   }
 
   render() {
-    // const { google } = this.props;
-    const { places, clicked, showClicked, activeIndex } = this.state;
+    const { places, showClicked, activeMarker } = this.state;
     return (
       <Map onChange={this.props.onChange}
            google={this.props.google}
@@ -81,34 +77,28 @@ class MapContainer extends Component {
         <Marker title={'Rome, Italy'} name={'Current Location'} />
         {places && places.map((place, index) => (
           <Marker key={index}
-                  onClick={() => this.onMarkerClicked()}
-                  title={place.name} 
-                  name={place.name} 
+                  onClick={this.onMarkerClicked}
+                  title={place.name}
+                  name={place.name}
+                  categories={place.categories ? place.categories.map(c => c.name) : 'no categories found'}
                   position={{lat: place.location.lat, lng: place.location.lng}}
-                  animation={(activeIndex !== index || activeIndex === -1) ? 0 : 1}>
+                  animation={this.markerAnimation(index)} />
+        ))}          
 
-              {showClicked && (
-                // <div style={{
-                //   position: 'absolute',
-                //   border: '3px solid blue',
-                //   zIndex: 100
-                // }}>Blah!</div>
-                          <InfoWindow>
-                            <div aria-hidden="false" role="presentation">
-                              <p>{place.name}</p>
-                              <span>{place.location.address}, {place.location.city}, {place.location.country}</span>
-                            </div>
-                          </InfoWindow>
-              )}
 
-          </Marker>          
-        ))}
+        <InfoWindow
+          marker={this.state.activeMarker}
+          visible={showClicked}>
+          <div aria-hidden="false" role="presentation">
+            <span style={{fontWeight: 'bold'}}>{ activeMarker && activeMarker.name ? activeMarker.name : ''}</span><br />
+            <span>{ activeMarker && activeMarker.categories ? activeMarker.categories.map(c => c) : 'no categories found'}</span>
+          </div>
+        </InfoWindow>
       </Map>     
     )
   }
 }
 
 export default GoogleApiWrapper({
-  apiKey: key,
-  libraries: ['places']
+  apiKey: key
 })(MapContainer);

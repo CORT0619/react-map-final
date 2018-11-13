@@ -61,7 +61,8 @@ class App extends Component {
         this.setState({
           places: places
         });
-      });
+      })
+      .catch(err => alert('An error occurred. Please try again later!'));
   }
 
   clicked = place => {
