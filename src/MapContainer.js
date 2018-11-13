@@ -94,7 +94,7 @@ class MapContainer extends Component {
                 //   zIndex: 100
                 // }}>Blah!</div>
                           <InfoWindow>
-                            <div>
+                            <div aria-hidden="false" role="presentation">
                               <p>{place.name}</p>
                               <span>{place.location.address}, {place.location.city}, {place.location.country}</span>
                             </div>

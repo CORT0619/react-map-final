@@ -50,6 +50,7 @@ class SearchPage extends Component {
     return (
       <div className="searchContainer">
         <input id="search"
+               autoFocus
                aria-label="Search the neighborhood"
                name="search"
                type="text" 
