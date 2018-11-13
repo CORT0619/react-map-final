@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
 import PropTypes from 'prop-types';
+import { key } from './key';
 
 const mapStyles = {
   width: '100%',
@@ -88,7 +89,7 @@ class MapContainer extends Component {
                   name={place.name} 
                   position={{lat: place.location.lat, lng: place.location.lng}}
                   animation={(activeIndex !== index || activeIndex === -1) ? 0 : 1}>
-                  
+
               {this.state.showClicked && (
                 <div style={{
                   position: 'absolute',
@@ -113,6 +114,6 @@ class MapContainer extends Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: 'AIzaSyDwisjv_Ak2JqMQn7KmiK5KCpfbXlz0yPE',
+  apiKey: key,
   libraries: ['places']
 })(MapContainer);
