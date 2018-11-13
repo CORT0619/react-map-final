@@ -48,7 +48,6 @@ class SearchPage extends Component {
     const { places } = this.state;
     return (
       <div className="searchContainer">
-        <label htmlFor="search">Search the neighborhood</label>
         <input id="search"
                aria-label="Search the neighborhood"
                name="search"

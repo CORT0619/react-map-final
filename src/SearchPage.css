@@ -1,9 +1,21 @@
-/* .search {
-  overflow-y: scroll;
-} */
+.search {
+  width: 40vw;
+  max-width: 40vw;
+}
+.searchContainer input {
+  width: calc(100% - 20px);
+}
 
 .placesList {
   padding-top: 100px;
+}
+
+.placesList ul {
+  padding-left: 0;
+}
+
+.placeList ul li {
+  width: calc(100% - 40px);
 }
 
 .placesList ul li {
@@ -12,8 +24,8 @@
   border-radius: 2px;
   margin: 10px 5px;
   padding: 10px 20px;
-  width: 300px;
-  max-width: 300px;
+  /* width: 300px;
+  max-width: 300px; */
   min-width: 10%;
 }
 

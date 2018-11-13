@@ -1,3 +1,7 @@
 body {
   margin: 0;
 }
+
+.map {
+  width: calc(100%-60vw);
+}
