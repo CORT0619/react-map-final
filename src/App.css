@@ -44,4 +44,25 @@ html, body {
   left: 40%;
 }
 
+@media screen and (max-device-width: 699px) {
+  /* .App {
+    flex-direction: column;
+  } */
+
+  .map {
+    height: 50%;
+    width: 100%;
+    max-width: 100%;
+    left: 0;
+  }
+
+  .App > .search {
+    height: calc(100% - 50%);
+    width: 100%;
+    max-width: 100%;
+    bottom: 0;
+    overflow: scroll;
+  }
+}
+
 
