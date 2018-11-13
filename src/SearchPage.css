@@ -1,0 +1,27 @@
+/* .search {
+  overflow-y: scroll;
+} */
+
+.placesList {
+  padding-top: 100px;
+}
+
+.placesList ul li {
+  list-style-type: none;
+  border: 1px solid #ebe3e3;
+  border-radius: 2px;
+  margin: 10px 5px;
+  padding: 10px 20px;
+  width: 300px;
+  max-width: 300px;
+  min-width: 10%;
+}
+
+.placesList ul li:hover {
+  cursor: pointer;
+}
+
+.place_info {
+  font-size: 11px;
+  /* display: none; */
+}
