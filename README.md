@@ -11,6 +11,15 @@ After you've cloned this repo, you'll need to navigate to the project folder and
 
 Once you have the desired places you can then click on one of the list items and then the marker will start jumping on the google map to the right so you'll know just where your desired location lies.
 
+** ServiceWorker: In order to run the application with the service worker enabled you will need to do a production build of the app. 
+
+In order to run a production build, follow the steps below:
+
+1. run `npm run build`
+2. run `npm install -g serve`
+3. run `serve -s build`
+4. Following the previous command a url will be provided where you can access the app
+
 ### Prerequisite
 
 Simply know how to use a browser and google maps! Easy peazy!

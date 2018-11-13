@@ -66,7 +66,7 @@ class MapContainer extends Component {
   }
 
   render() {
-    const { google } = this.props;
+    // const { google } = this.props;
     const { places, clicked, showClicked, activeIndex } = this.state;
     return (
       <Map onChange={this.props.onChange}
@@ -87,7 +87,7 @@ class MapContainer extends Component {
                   position={{lat: place.location.lat, lng: place.location.lng}}
                   animation={(activeIndex !== index || activeIndex === -1) ? 0 : 1}>
 
-              {this.state.showClicked && (
+              {showClicked && (
                 // <div style={{
                 //   position: 'absolute',
                 //   border: '3px solid blue',

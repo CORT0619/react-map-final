@@ -100,7 +100,7 @@ class App extends Component {
             activeIndex={this.activeIndex}
               />
         </div>
-        <div id="map" className="map">
+        <div id="map" className="map" role="application">
           <MapContainer places={filteredPlaces || this.state.places} 
                         query={this.state.query}
                         clicked={this.state.clicked}
