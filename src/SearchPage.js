@@ -63,7 +63,9 @@ class SearchPage extends Component {
           {places && places.length > 0 && (
               <ul aria-labelledby="places_lbl" role="presentation">
                 {places.map((place, indx) => (
-                  <li key={indx} onClick={() => {
+                  <li 
+                    tabindex="0"
+                    key={indx} onClick={() => {
                     this.displayPlaceData(place, indx)
                   }}>
                   <span style={{
