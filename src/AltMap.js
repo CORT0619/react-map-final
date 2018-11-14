@@ -14,8 +14,8 @@ class AltMap extends Component {
 
 	componentDidMount() {
 		const id = window.setTimeout(
-			this.showErrorMsg()
-		, 500);
+			this.showErrorMsg
+		, 200);
 
 		this.setState({ 
 			timeOutId: id
@@ -34,7 +34,7 @@ class AltMap extends Component {
 				display: 'flex', 
 				justifyContent: 'center'
 			}}>
-				{showInitial ?
+				{showInitial ? 
 					<div>
 						<h3>Error:</h3>
 						<p>Google Maps Failed to Load.</p>
