@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
 import PropTypes from 'prop-types';
 import { key } from './key';
+import AltMap from './AltMap.js';
 
 const mapStyles = {
   width: '100%',
@@ -23,9 +24,7 @@ class MapContainer extends Component {
     activePlace: {}
   };
 
-  
   componentWillReceiveProps(nextProps) {
-    console.log('nextProps ', nextProps);
     /*  update state with new places if they've changed */
     if (nextProps.places !== this.state.places) {
       this.setState({
@@ -60,6 +59,12 @@ class MapContainer extends Component {
     if (this.state.activeIndex === currentIndex) {
       return 1;
     }
+  }
+
+  componentDidMount() {
+    window.gm_authFailure = () => {
+      return alert('Google Maps Failed to Load');
+    };
   }
 
   render() {
@@ -100,6 +105,6 @@ class MapContainer extends Component {
 }
 
 export default GoogleApiWrapper({
-  // apiKey: key
-  apiKey: 'sklksjdlkj'
+  apiKey: key,
+  LoadingContainer: AltMap
 })(MapContainer);
