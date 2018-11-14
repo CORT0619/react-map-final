@@ -1,9 +1,32 @@
 import React, { Component } from 'react';
+import ErrorBoundary from './ErrorBoundary';
 import './App.css';
 import SearchPage from './SearchPage';
 import MapContainer from './MapContainer';
 import { /*load_google_maps, getPlaces, */getFoursquarePlaces } from './utils';
 import escapeRegExp from 'escape-string-regexp';
+
+window.onerror = (msg, url, lineNo, columnNo, err) => {
+  console.log('here');
+  var string = msg.toLowerCase();
+  var substring = "script error";
+  if (string.indexOf(substring) > -1) {
+      alert('Script Error: See Browser Console for Detail');
+  } else {
+      var message = [
+          'Message: ' + msg,
+          'URL: ' + url,
+          'Line: ' + lineNo,
+          'Column: ' + columnNo,
+          'Error object: ' + JSON.stringify(err)
+      ].join(' - ');
+
+      alert(message);
+  }
+
+  return false;
+
+};
 
 class App extends Component {
 
@@ -21,14 +44,34 @@ class App extends Component {
     });
   }
 
-  // updatePlaces = event => {
-  //   console.log('something');
-  //   console.log('event.target.value ', event.target.value);
-  //   // this.setState({
-  //   //   clicked: event.target.value
-  //   // });
-  //   console.log('places ', this.state.places);
-  // }
+  detectErrors() {
+    window.onerror = (msg, url, lineNo, columnNo, err) => {
+      console.log('here');
+      var string = msg.toLowerCase();
+      var substring = "script error";
+      if (string.indexOf(substring) > -1) {
+          alert('Script Error: See Browser Console for Detail');
+      } else {
+          var message = [
+              'Message: ' + msg,
+              'URL: ' + url,
+              'Line: ' + lineNo,
+              'Column: ' + columnNo,
+              'Error object: ' + JSON.stringify(err)
+          ].join(' - ');
+  
+          alert(message);
+      }
+  
+      return false;
+
+    };
+  }
+
+  componentWillMount() {
+    console.log('loaded');
+    this.detectErrors();
+  }
 
   componentDidMount() {
     // let maps = load_google_maps();
@@ -62,7 +105,7 @@ class App extends Component {
           places: places
         });
       })
-      .catch(err => alert('An error occurred. Please try again later!'));
+      .catch(err => console.log('')/*alert('An error occurred. Please try again later!')*/);
   }
 
   clicked = place => {
@@ -102,11 +145,13 @@ class App extends Component {
               />
         </div>
         <div id="map" className="map" role="application">
-          <MapContainer places={filteredPlaces || this.state.places} 
-                        query={this.state.query}
-                        clicked={this.state.clicked}
-                        activeIndex={this.state.activeIndex}
-          />
+          <ErrorBoundary>
+            <MapContainer places={filteredPlaces || this.state.places} 
+                          query={this.state.query}
+                          clicked={this.state.clicked}
+                          activeIndex={this.state.activeIndex}
+            />
+          </ErrorBoundary>
         </div>
       </div>
     );

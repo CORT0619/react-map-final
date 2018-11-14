@@ -64,7 +64,7 @@ class SearchPage extends Component {
               <ul aria-labelledby="places_lbl" role="presentation">
                 {places.map((place, indx) => (
                   <li 
-                    tabindex="0"
+                    tabIndex="0"
                     key={indx} onClick={() => {
                     this.displayPlaceData(place, indx)
                   }}>

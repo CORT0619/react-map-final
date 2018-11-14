@@ -8,5 +8,5 @@ export function getFoursquarePlaces() {
 
   return fetch(url)
     .then(response => response && response.status === 200 ? response.json() : '')
-    .catch(() => alert('An error occurred. Please try again later.'));
+    .catch(() => console.log('')/*alert('An error occurred. Please try again later.')*/);
 }
